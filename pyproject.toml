@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "raceproof"
+version = "0.1.0"
+description = "Concurrent backend scenarios, domain invariants and reproducible race reports"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "raceproof contributors"}]
+classifiers = ["Framework :: Pytest", "Programming Language :: Python :: 3", "Typing :: Typed"]
+
+[project.optional-dependencies]
+http = ["httpx>=0.27,<1"]
+pytest = ["pytest>=8,<10"]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "httpx>=0.27,<1", "mypy>=1.13,<2", "ruff>=0.9,<1"]
+
+[project.entry-points.pytest11]
+raceproof = "raceproof.pytest_plugin"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
